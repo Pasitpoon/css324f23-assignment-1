@@ -1,6 +1,5 @@
 import copy
 
-
 def initial_state():
     return ((7, 2, 4, 5, 0, 6, 8, 3, 1), 1, 1)
 
@@ -48,7 +47,27 @@ def h1(s):
             res += 1
     return res
 
+
 def h3(s):
     # implement this function
     board, _, _ = s
-    return 0
+    res = 0
+
+    #check row
+    for idx, tile in enumerate(board):
+        if tile > 0:
+            goal_row = (tile - 1) // 3
+            current_row = idx // 3
+            if current_row != goal_row:
+                res += 1
+
+    #check column
+    for idx, tile in enumerate(board):
+        if tile > 0:
+            goal_column = (tile - 1) % 3
+            current_column = idx % 3
+            if goal_column != current_column:
+                res += 1
+
+    
+    return res
